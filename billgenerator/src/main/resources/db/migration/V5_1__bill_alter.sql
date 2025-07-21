@@ -1,0 +1,1 @@
+ALTER TABLE bill MODIFY deadline date DEFAULT NULL;

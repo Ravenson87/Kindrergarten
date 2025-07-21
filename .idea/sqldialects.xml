@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/billgenerator/src/main/resources/db/migration/V1_0__init.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/billgenerator/src/main/resources/db/migration/V3_0__child.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/billgenerator/src/main/resources/db/migration/V3_1__child_alter.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/billgenerator/src/main/resources/db/migration/V4_0__programs.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/billgenerator/src/main/resources/db/migration/V5_0__bill.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/billgenerator/src/main/resources/db/migration/V5_1__bill_alter.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/billgenerator/src/main/resources/db/migration/V6_0__child_program.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/billgenerator/src/main/resources/db/migration/V7_0__kindergarten_bill.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/billgenerator/src/main/resources/db/migration/V7_1__kindergarten_bill_alter.sql" dialect="GenericSQL" />
+  </component>
+</project>

@@ -1,0 +1,1 @@
+ALTER TABLE child RENAME COLUMN `group` TO `group_name`;
