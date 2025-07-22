@@ -15,9 +15,6 @@ import lombok.ToString;
 import org.hibernate.envers.Audited;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.util.Date;
 
 
 @Getter
@@ -27,6 +24,7 @@ import java.util.Date;
 @Entity
 @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
 @Table(name = "kindergarten")
+@Audited
 public class Kindergarten extends Auditable implements Serializable {
 
     @Id
