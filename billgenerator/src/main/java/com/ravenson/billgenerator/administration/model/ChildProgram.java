@@ -10,11 +10,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.envers.Audited;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.util.Date;
+
 
 @Getter
 @Setter
@@ -23,6 +22,7 @@ import java.util.Date;
 @Entity
 @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
 @Table(name = "child_program")
+@Audited
 public class ChildProgram extends Auditable implements Serializable {
 
     @Id

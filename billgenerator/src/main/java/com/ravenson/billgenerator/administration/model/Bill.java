@@ -26,6 +26,7 @@ import java.io.Serializable;
 @Entity
 @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
 @Table(name = "bill")
+@Audited
 public class Bill extends Auditable implements Serializable {
 
     @Id

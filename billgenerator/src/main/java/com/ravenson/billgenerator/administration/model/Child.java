@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ravenson.billgenerator.SharedTools.models.Auditable;
-import com.ravenson.billgenerator.administration.repository.KindergartenRepository;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
@@ -15,11 +14,6 @@ import org.hibernate.envers.Audited;
 
 
 import java.io.Serializable;
-import java.sql.ClientInfoStatus;
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
@@ -29,6 +23,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
 @Table(name = "child")
 //Razmisli sta bi u bazi trebalo da bude unique, da ne bi mogla da se unesu 2 potpuno ista deteta!!!
+@Audited
 public class Child extends Auditable implements Serializable {
 
     @Id
