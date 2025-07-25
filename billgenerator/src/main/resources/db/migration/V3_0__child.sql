@@ -2,7 +2,7 @@ CREATE TABLE `child` (
     `id` INT (11) NOT NULL AUTO_INCREMENT,
     `full_name` VARCHAR (255) NOT NULL,
     `parent_name` VARCHAR (255) NOT NULL,
-    `group` VARCHAR (255) NOT NULL,
+    `group_name` VARCHAR (255) NOT NULL,
     `kindergarten_id` INT (11) NOT NULL,
     `parent_email` VARCHAR (255) NOT NULL,
     `discount` TINYINT UNSIGNED DEFAULT 0,

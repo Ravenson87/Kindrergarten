@@ -1,7 +1,7 @@
 CREATE TABLE `programs` (
     `id` INT (11) NOT NULL AUTO_INCREMENT,
     `name` VARCHAR (255) NOT NULL,
-    `price` DECIMAL (7,2) DEFAULT 0,
+    `price` DECIMAL (10,2) NOT NULL DEFAULT 0,
     `status` BOOLEAN DEFAULT true,
     `created_by` VARCHAR (255) DEFAULT NULL,
     `last_modified_by` VARCHAR (255) DEFAULT NULL,

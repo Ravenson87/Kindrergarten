@@ -1,1 +1,3 @@
-ALTER TABLE child RENAME COLUMN `group` TO `group_name`;
+ALTER TABLE child
+MODIFY `discount` TINYINT UNSIGNED DEFAULT 0,
+MODIFY `sibling_position` TINYINT UNSIGNED DEFAULT 1;
