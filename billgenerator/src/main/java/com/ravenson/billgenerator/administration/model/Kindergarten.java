@@ -51,6 +51,13 @@ public class Kindergarten extends Auditable implements Serializable {
     @Column(name = "price")
     private Double price;
 
+    //TODO Zavrsi ovo sutra... dakle, dodaj kolonu, stavi da je not null (al prvo stavi da moze, jer imas podatke)
+    // i stavi da je unique. Razmisli koji ce tip podatka da ti bude, jer je bankovni racun veliki (dakle ili BIG INT ili VARCHAR)
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @JsonProperty("account_number")
+    @Column(name = "account_number")
+    private String accountNumber;
+
     @NotNull(message = "pib can not be null")
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     @JsonProperty("pib")

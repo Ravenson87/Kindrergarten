@@ -4,7 +4,6 @@ import com.ravenson.billgenerator.SharedTools.exceptions.CustomException;
 import com.ravenson.billgenerator.SharedTools.helpers.Helper;
 import com.ravenson.billgenerator.administration.model.Kindergarten;
 import com.ravenson.billgenerator.administration.repository.KindergartenRepository;
-import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,10 +26,14 @@ public class KindergartenService {
         if(model == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        Kindergarten check = kindergartenRepository.findByPib(model.getPib()).orElse(null);
-        if(check != null) {
-            throw new EntityExistsException("Kindergarten with pib" + model.getPib() + "already exists");
+
+        if(kindergartenRepository.existsByPib(model.getPib())) {
+            throw new CustomException("Kindergarten with pib" + model.getPib() + "already exists");
         }
+        if(kindergartenRepository.existByAccountNumber(model.getAccountNumber())) {
+            throw new CustomException("Kindergarten with accountName " + model.getPib() + " already exists");
+        }
+
         try{
             kindergartenRepository.save(model);
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -67,10 +70,24 @@ public class KindergartenService {
      * @return ResponseEntity<Kindergarten>
      */
     public ResponseEntity<Kindergarten> readByPib(Integer pib) {
-        if(pib == null || pib <= 0) {
+        if(pib == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         Kindergarten result = kindergartenRepository.findByPib(pib).orElse(null);
+        return result == null ? ResponseEntity.noContent().build() : ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    /**
+     * Read Kindergarten by accountName from database
+     * @param accountNumber String
+     * @return ResponseEntity<Kindergarten>
+     */
+    public ResponseEntity<Kindergarten> readByAccountNumber(String accountNumber) {
+        if(accountNumber == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        Kindergarten result = kindergartenRepository.findByAccountNumber(accountNumber).orElse(null);
         return result == null ? ResponseEntity.noContent().build() : ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
@@ -90,10 +107,17 @@ public class KindergartenService {
         }
         Kindergarten checkKindergartenPib = kindergartenRepository.findByPib(model.getPib()).orElse(null);
 
+        //TODO Proveri ove dve metode i pitaj Milicu da li imaju smisla
+        // Dakle, sta one rade?! Prvo, proveravaju da li vec postoji objekat sa tim pib-om, odnosno accountNumber-om
+        // Ako postoje, a nemaju ID objekta koji hocu da updatujem, onda mu ne dozvoljava da ga updatuje (jer bi ponovio unique key)
         if(checkKindergartenPib != null && !checkKindergartenPib.getId().equals(kindergartenId)) {
         throw new CustomException("Kindergarten with pib " + model.getPib() + " already exists");
         }
 
+        Kindergarten checkKindergartenAccountNumber = kindergartenRepository.findByAccountNumber(model.getAccountNumber()).orElse(null);
+        if(checkKindergartenAccountNumber != null && !checkKindergartenAccountNumber.getId().equals(kindergartenId)) {
+            throw new CustomException("Kindergarten with accountName " + model.getAccountNumber() + " already exists");
+        }
         try{
             model.setId(kindergartenId);
             kindergartenRepository.save(model);

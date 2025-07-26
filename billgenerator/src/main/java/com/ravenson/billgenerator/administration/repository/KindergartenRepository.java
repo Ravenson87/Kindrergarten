@@ -8,4 +8,7 @@ import java.util.Optional;
 public interface KindergartenRepository extends CrudRepository<Kindergarten, Integer> {
 
     Optional<Kindergarten> findByPib(Integer pib);
+    Boolean existsByPib(Integer pib);
+    Boolean existByAccountNumber(String accountNumber);
+    Optional<Kindergarten> findByAccountNumber(String accountNumber);
 }

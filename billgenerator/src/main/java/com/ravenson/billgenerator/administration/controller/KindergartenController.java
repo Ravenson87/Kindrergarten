@@ -53,6 +53,17 @@ public class KindergartenController {
     ){
         return kindergartenService.readByPib(pib);
     }
+
+    @GetMapping("/read-by-account-name")
+    public ResponseEntity<Kindergarten> readByAccountNumber(
+            @Valid
+            @RequestParam("account_number")
+            @NotNull(message = "Account number can not be null")
+            String accountNumber
+    ){
+        return kindergartenService.readByAccountNumber(accountNumber);
+    }
+
     @PutMapping("/update")
     public ResponseEntity<String> update(
             @Valid
