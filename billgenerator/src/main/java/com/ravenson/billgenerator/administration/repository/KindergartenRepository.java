@@ -9,6 +9,9 @@ public interface KindergartenRepository extends CrudRepository<Kindergarten, Int
 
     Optional<Kindergarten> findByPib(Integer pib);
     Boolean existsByPib(Integer pib);
-    Boolean existByAccountNumber(String accountNumber);
+    Boolean existsByAccountNumber(String accountNumber);
+    Boolean existsByKindergartenPhone(String kindergartenPhone);
     Optional<Kindergarten> findByAccountNumber(String accountNumber);
+    Optional<Kindergarten> findByKindergartenPhone(String phone);
+
 }

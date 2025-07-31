@@ -45,6 +45,13 @@ public class Child extends Auditable implements Serializable {
     @Column(name = "parent_name")
     private String parentName;
 
+    @NotEmpty(message = "parent address can not be null empty")
+    @NotBlank(message = "parent address can not be blank")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @JsonProperty("parent_address")
+    @Column(name = "parent_address")
+    private String parentAddress;
+
     @NotEmpty(message = "group name can not be null or empty")
     @NotBlank(message = "group name can not be blank")
     @JsonFormat(shape = JsonFormat.Shape.STRING)

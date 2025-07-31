@@ -30,8 +30,12 @@ public class KindergartenService {
         if(kindergartenRepository.existsByPib(model.getPib())) {
             throw new CustomException("Kindergarten with pib" + model.getPib() + "already exists");
         }
-        if(kindergartenRepository.existByAccountNumber(model.getAccountNumber())) {
+        if(kindergartenRepository.existsByAccountNumber(model.getAccountNumber())) {
             throw new CustomException("Kindergarten with accountName " + model.getPib() + " already exists");
+        }
+
+        if(kindergartenRepository.existsByKindergartenPhone(model.getKindergartenPhone())) {
+            throw new CustomException("Kindergarten with phone number " + model.getKindergartenPhone() + " already exists");
         }
 
         try{
@@ -117,6 +121,11 @@ public class KindergartenService {
         Kindergarten checkKindergartenAccountNumber = kindergartenRepository.findByAccountNumber(model.getAccountNumber()).orElse(null);
         if(checkKindergartenAccountNumber != null && !checkKindergartenAccountNumber.getId().equals(kindergartenId)) {
             throw new CustomException("Kindergarten with accountName " + model.getAccountNumber() + " already exists");
+        }
+
+        Kindergarten checkKindergartenPhone = kindergartenRepository.findByKindergartenPhone(model.getKindergartenPhone()).orElse(null);
+        if(checkKindergartenPhone!= null && !checkKindergartenPhone.getId().equals(kindergartenId)) {
+            throw new CustomException("Kindergarten with that phone " + model.getKindergartenPhone() + " already exists");
         }
         try{
             model.setId(kindergartenId);
