@@ -16,7 +16,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-//TODO Napraviti ovde i na KindergartenBill-u find by unique constraint
+
 public class ChildProgramService {
 
     private final ChildProgramRepository childProgramRepository;
@@ -76,6 +76,25 @@ public class ChildProgramService {
         }
         ChildProgram result = childProgramRepository.findById(id).orElse(null);
         return result == null ? ResponseEntity.noContent().build() : ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    /**
+     *
+     * @param childId Integer
+     * @param programId Integer
+     * @return ResponseEntity<ChildProgram>
+     */
+    public ResponseEntity<ChildProgram> readByChildIdAndProgramId(Integer childId, Integer programId) {
+//        //Pitaj za ovo, ali verovatno ti ne treba jer proveravas u kontroleru
+//        if(childId == null || programId == 0) {
+//            return ResponseEntity.noContent().build();
+//        }
+        ChildProgram result = childProgramRepository.findByChildIdAndProgramId(childId, programId).orElse(null);
+        if(result == null) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+
     }
 
     /**

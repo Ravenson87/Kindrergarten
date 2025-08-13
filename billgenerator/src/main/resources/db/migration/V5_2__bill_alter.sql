@@ -1,0 +1,1 @@
+ALTER TABLE `bill` ADD COLUMN `bill_code` VARCHAR(255) DEFAULT NULL AFTER `child_id`;

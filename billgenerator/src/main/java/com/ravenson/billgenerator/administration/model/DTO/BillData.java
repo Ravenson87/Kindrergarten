@@ -10,6 +10,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 @Data
 @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
@@ -35,7 +36,6 @@ public class BillData {
     @JsonProperty("sender_address")
     private String senderAddress;
 
-    //TODO napravi servis za ovo
     @NotEmpty(message = "bill code can not be null or empty")
     @NotBlank(message = "bill code name can not be blank")
     @JsonFormat(shape = JsonFormat.Shape.STRING)
@@ -61,10 +61,10 @@ public class BillData {
     private LocalDate issueDate;
 
     //TODO vidi da li je ovo datum ili period
-    @NotNull(message = "transaction date  can not be null")
+    @NotNull(message = "transaction date can not be null")
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     @JsonProperty("transaction_date")
-    private LocalDate transactionDate;
+    private Period transactionDate;
 
     @NotNull(message = "payment deadline can not be null")
     @JsonFormat(shape = JsonFormat.Shape.STRING)

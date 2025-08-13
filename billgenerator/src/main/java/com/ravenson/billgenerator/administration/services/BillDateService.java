@@ -1,6 +1,7 @@
 package com.ravenson.billgenerator.administration.services;
 
 import com.ravenson.billgenerator.SharedTools.exceptions.CustomException;
+import com.ravenson.billgenerator.administration.model.Bill;
 import com.ravenson.billgenerator.administration.model.Child;
 import com.ravenson.billgenerator.administration.model.Kindergarten;
 import com.ravenson.billgenerator.administration.repository.ChildRepository;
@@ -9,6 +10,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.Period;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -56,7 +62,20 @@ public class BillDateService {
         return child.getParentAddress();
     }
 
-    //TODO napravi BillCode srvis...
+    //TODO Pitati sta je slovo na kraju
+
+    /**
+     * Creating special code for bill identification
+     * @return String
+     */
+    public String createBillCode(){
+//        Mozda zatreba!!!
+//        String random = RandomStringUtils.secure().nextAlphabetic(1);
+        LocalDateTime now = LocalDateTime.now();
+        String billCode = now.getDayOfMonth() + "-" + now.getMonthValue() + "-" + now.getYear();
+
+        return billCode;
+    }
 
     /**
      * Return kindergarten name from child id
@@ -82,7 +101,43 @@ public class BillDateService {
         return kindergarten.getAddress();
     }
 
-    //TODO napravi servise vezane za datume
+    //TODO Vidi da li je ovo dobro (da li ima smisla)
+
+    /**
+     * Create date when bill is realised
+     * @return LocalDate
+     */
+    public LocalDate getIssueDate(){
+        return LocalDate.now();
+    }
+
+    /**
+     * Create in what period bill must be paid
+     * @param bill Bill
+     * @return Period
+     */
+    public Period getTransactionDate(Bill bill){
+        //TODO ovo pitati obavezno Micu kako da se resi (verovatno cemo nekako videti iz fronta)
+        String month = bill.getMonth().toUpperCase();
+        Integer year = bill.getYear();
+        LocalDate startDate = LocalDate.of(year, Month.valueOf(month), 1 );
+        //Pitaj i za ovo, za svaki slucaj
+        LocalDate endDate = LocalDate.of(year, Month.valueOf(month), startDate.with(TemporalAdjusters.lastDayOfMonth())
+                .getDayOfMonth());
+        return Period.between(startDate, endDate);
+    }
+
+    /**
+     * Create deadline for bill payment
+     * @param bill Bill
+     * @return LocalDate
+     */
+    //TODO pitaj da li ovde da upisem deadLine ili ne?
+    public LocalDate getPaymentDeadline(Bill bill){
+        String month = bill.getMonth().toUpperCase();
+        Integer year = bill.getYear();
+        return LocalDate.of(year, Month.valueOf(month), 1);
+    }
 
     /**
      * Return kindergarten pib from child id
@@ -119,5 +174,7 @@ public class BillDateService {
         }
         return child.get();
     }
+
+
 }
 

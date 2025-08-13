@@ -45,6 +45,21 @@ public class ChildProgramController {
     ){
         return childProgramService.readById(id);
     }
+    @GetMapping("/read-by-child-id-and-program-id")
+    public ResponseEntity<ChildProgram> readByChildIdAndProgramId(
+            @Valid
+            @RequestParam("child_id")
+            @NotNull(message = "child id can not be null")
+            @Min(value = 1, message = "Id can not be less then one")
+            Integer childId,
+            @Valid
+            @RequestParam("program_id")
+            @NotNull(message = "program id can not be null")
+            @Min(value = 1, message = "Id can not be less then one")
+            Integer programId
+    ){
+        return childProgramService.readByChildIdAndProgramId(childId, programId);
+    }
     @PutMapping("/update")
     public ResponseEntity<String> update(
             @Valid
