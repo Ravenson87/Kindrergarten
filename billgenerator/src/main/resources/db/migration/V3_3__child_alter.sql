@@ -1,0 +1,1 @@
+ALTER TABLE `child` ADD COLUMN `parent_address` VARCHAR(255) DEFAULT NULL AFTER `parent_name`;
